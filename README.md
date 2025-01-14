@@ -2,7 +2,7 @@
 
 # Todo App Frontend
 
-This is the frontend for the Todo App, a CRUD application where users can register, log in, and manage their todo lists. The application is built using React/Typescreipt with the backend API for authentication and data management.
+This is the frontend for the Todo App, a CRUD application where users can register, log in, and manage their todo lists. The application is built using React/Typescript with the backend API for authentication and data management.
 
 ---
 
@@ -27,10 +27,10 @@ Before running the project, ensure you have the following installed:
 ```bash
 git clone https://github.com/your-username/todo-frontend.git
 cd todo-frontend
+```
 
 ### 2. Install Dependencies 
-npm install
+``` npm install ```
 
 ### 3. Start Development Server
-npm run dev
-
+``` npm run dev ```
