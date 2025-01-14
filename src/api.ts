@@ -9,7 +9,6 @@ const api = axios.create({
 
 export default api;
 
-
 export const setAuthToken = (token: string) => {
     if (token) {
       api.defaults.headers.common["Authorization"] = token;

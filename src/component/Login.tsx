@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import {AxiosError} from "axios";
 import api, { setAuthToken } from "../api";
 import {useNavigate} from "react-router-dom";
-import {ToastContainer, toast} from "react-toastify";
+import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
@@ -16,32 +15,29 @@ const Login = () => {
       const { data } = await api.post("/auth/login", { email, password });
       setAuthToken(data.token);
       console.log(data)
-      if(data.token){
         toast.success("Login successful!", {
           position: "top-right",
         });
-      } else{
-        toast.error("Login failed!", {
-          position: "top-right",
-        });
+        navigate("/dashboard");
       }
      
-      navigate("/dashboard");
-    } catch (error: unknown) {
-        if (error instanceof AxiosError) {
-          console.error("Login failed:", error.response?.data);
-           toast.error("Login failed, please try again", {
-                    position: "top-right",
-                  });
+      catch (error: any) {
+        if (error.response) {
+          
+          const message = error.response.data.message || "Login failed!";
+          toast.error(message, {
+            position: "top-right",
+          });
         } else {
-          console.error("Unexpected error:", error);
+          toast.error("An unexpected error occurred. Please try again.", {
+            position: "top-right",
+          });
         }
       }
-  };
-
+    };
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-    <div className="w-full max-w-md p-6 bg-white rounded-lg shadow-lg">
+    <div className="flex items-center justify-center min-h-screen bg-purple-400">
+    <div className="w-full max-w-md p-6 bg-white rounded-lg bg-gray-200 shadow-lg">
       <h2 className="text-2xl font-bold text-center text-gray-800">Login</h2>
 
     <form onSubmit={handleLogin} className="space-y-4 mt-4">
@@ -61,7 +57,7 @@ const Login = () => {
       />
       <button 
       type="submit" 
-      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500">Login 
+      className="w-full px-4 py-2 border bg-purple-600 text-white rounded-lg focus:ring-2 focus:ring-blue-500">Login 
       </button>
     </form>
     <p className="mt-4 text-sm text-center text-gray-600">
